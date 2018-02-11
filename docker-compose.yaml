@@ -1,0 +1,30 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:3.4
+    container_name: mongo
+    volumes:
+      - mongo-volume:/data/db
+      - mongo-configdb-volume:/data/configdb
+
+    networks:
+      - public
+
+  python:
+    image: python
+    build: ./python_apps
+    container_name: python 
+    ports:
+      - 5000:5000       
+    networks:
+      - public       
+
+
+volumes:
+  mongo-volume:
+  mongo-configdb-volume: 
+
+
+networks:
+  public:
+    driver: bridge 
